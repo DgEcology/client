@@ -32,7 +32,7 @@ export default async function EventPage({
           {/* !!! Когда ручки будут готовы, указать тут переменные вместо заглушек */}
           <LikeButton eventId={params.id} likes={0} isLiked={false} />
         </div>
-        <p className="mt-2 text-xl text-neutral-700 md:text-2xl">
+        <p className="mt-2 text-lg text-neutral-700 md:text-xl">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -66,11 +66,11 @@ export default async function EventPage({
         </div>
       </div>
       {isRegistered ? (
-        <Button className="w-full" disabled>
+        <Button className="w-full h-14" disabled>
           Участвует
         </Button>
       ) : (
-        <Button className="w-full">Участвовать</Button>
+        <Button className="h-14 w-full text-lg">Участвовать</Button>
       )}
     </main>
   );

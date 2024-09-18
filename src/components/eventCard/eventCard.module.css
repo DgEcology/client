@@ -1,6 +1,5 @@
 .container {
-    @apply
-    flex
+  @apply flex
     w-[700px]
     h-[250px]
     rounded-2xl
@@ -10,22 +9,19 @@
     mobile:mb-0
     mobile:flex-col
     mobile:items-center
-    mobile:h-[520px]
-
+    mobile:h-[520px];
 }
 
 .imageContainer {
-    @apply
-    relative
+  @apply relative
     w-[350px]
     h-[250px]
     rounded-2xl
-    overflow-hidden
-
+    overflow-hidden;
 }
 
 .info {
-    @apply flex
+  @apply flex
     flex-col
     w-[350px]
     pl-[20px]
@@ -36,52 +32,46 @@
     mobile:shadow-2xl
     mobile:pt-[20px]
     mobile:pb-[20px]
-    mobile:z-10
+    mobile:z-10;
 }
 
 .title {
-    @apply
-    font-bold
-    text-[25px]
+  @apply font-bold
+    text-[25px];
 }
 
 .description {
-    @apply
-    mt-2
+  @apply mt-2;
 }
 
 .time {
-    @apply
-    mt-[20px]
+  @apply mt-[20px]
     justify-between
-    flex
+    flex;
 }
 
 .bottom {
-    @apply
-    justify-self-end
+  @apply justify-self-end
     flex
     items-center
     mt-auto
     gap-[10px]
-    mobile:pt-[10px]
+    mobile:pt-[10px];
 }
 
 .participateBtn {
-    @apply
-    w-[80%]
+  @apply w-[80%]
     bg-emerald-600
     p-[10px]
     text-white
     rounded-xl
     transition-[.2s]
     hover:bg-opacity-80
-    mobile:w-[83%]
+    mobile:w-[83%];
 }
 
 .likeBtn {
-    @apply
-    w-[14%]
+  @apply w-[14%]
     flex
     items-center
     justify-center
@@ -91,5 +81,5 @@
     text-white
     rounded-xl
     transition-[.2s]
-    hover:bg-opacity-80
+    hover:bg-opacity-80;
 }

@@ -24,12 +24,12 @@ export default function OrganizerApplication() {
   }
 
   return (
-    <form onSubmit={onSubmit}>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button className="w-full">Подать заявку</Button>
-        </DialogTrigger>
-        <DialogContent>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button className="w-full">Подать заявку</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <form onSubmit={onSubmit}>
           <DialogHeader>
             <DialogTitle>Подача заявки</DialogTitle>
             <DialogDescription>
@@ -56,8 +56,8 @@ export default function OrganizerApplication() {
               <Button type="button">Закрыть</Button>
             </DialogClose>
           </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </form>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }

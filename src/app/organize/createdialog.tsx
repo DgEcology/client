@@ -28,7 +28,7 @@ export default function CreateDialog() {
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <Button>Создать событие</Button>
+      <Button onClick={() => setOpen(true)}>Создать событие</Button>
       <DialogWindow open={open} onOpenChange={setOpen} />
     </div>
   );

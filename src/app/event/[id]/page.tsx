@@ -12,6 +12,8 @@ export default async function EventPage({
 }) {
   // Заменить все здесь и делать запрос к API
 
+  const isRegistered = false;
+
   return (
     <main className="mx-auto flex min-h-screen w-[100%] max-w-[900px] flex-col gap-2 p-4">
       <img
@@ -63,7 +65,13 @@ export default async function EventPage({
           <p>Экоцентр: Москва, ул. Пушкина, д. 8</p>
         </div>
       </div>
-      <Button className="w-full">Участвовать</Button>
+      {isRegistered ? (
+        <Button className="w-full" disabled>
+          Участвует
+        </Button>
+      ) : (
+        <Button className="w-full">Участвовать</Button>
+      )}
     </main>
   );
 }

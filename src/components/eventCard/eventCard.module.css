@@ -1,0 +1,95 @@
+.container {
+    @apply
+    flex
+    w-[700px]
+    h-[250px]
+    rounded-2xl
+    overflow-hidden
+    gap-[15px]
+    mb-[40px]
+    mobile:mb-0
+    mobile:flex-col
+    mobile:items-center
+    mobile:h-[520px]
+
+}
+
+.imageContainer {
+    @apply
+    relative
+    w-[350px]
+    h-[250px]
+    rounded-2xl
+    overflow-hidden
+
+}
+
+.info {
+    @apply flex
+    flex-col
+    w-[350px]
+    pl-[20px]
+    pr-[20px]
+    mobile:mt-[-60px]
+    mobile:bg-white
+    mobile:rounded-xl
+    mobile:shadow-2xl
+    mobile:pt-[20px]
+    mobile:pb-[20px]
+    mobile:z-10
+}
+
+.title {
+    @apply
+    font-bold
+    text-[25px]
+}
+
+.description {
+    @apply
+    mt-2
+}
+
+.time {
+    @apply
+    mt-[20px]
+    justify-between
+    flex
+}
+
+.bottom {
+    @apply
+    justify-self-end
+    flex
+    items-center
+    mt-auto
+    gap-[10px]
+    mobile:pt-[10px]
+}
+
+.participateBtn {
+    @apply
+    w-[80%]
+    bg-emerald-600
+    p-[10px]
+    text-white
+    rounded-xl
+    transition-[.2s]
+    hover:bg-opacity-80
+    mobile:w-[83%]
+}
+
+.likeBtn {
+    @apply
+    w-[14%]
+    flex
+    items-center
+    justify-center
+    h-[43px]
+    bg-emerald-600
+    p-[10px]
+    text-white
+    rounded-xl
+    transition-[.2s]
+    hover:bg-opacity-80
+}

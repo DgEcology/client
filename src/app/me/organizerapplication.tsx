@@ -15,7 +15,6 @@ import { Input } from "@/components/ui/input";
 import { FormEvent, useState } from "react";
 
 export default function OrganizerApplication() {
-  const [file, setFile] = useState<File | undefined>();
   const [open, setOpen] = useState(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {

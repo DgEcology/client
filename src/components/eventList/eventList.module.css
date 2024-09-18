@@ -1,6 +1,5 @@
 .container {
     @apply
-        w-[100vw]
     flex
     flex-col
     items-center

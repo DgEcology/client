@@ -13,7 +13,7 @@ const Header = () => {
                         size={30}
 
                     />
-                    <span className={classes.link}>Клевер</span>
+                    <span>Клевер</span>
                 </Link>
                 <Link href={'/stats'} className={classes.link}>
                     Статистика

@@ -76,6 +76,7 @@
     rounded-xl
     transition-[.2s]
     hover:bg-opacity-80
+    mobile:w-[83%]
 }
 
 .likeBtn {

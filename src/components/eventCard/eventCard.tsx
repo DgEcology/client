@@ -34,7 +34,7 @@ const EventCard = ({event}: { event: IEvent }) => {
                         Учавствовать
                     </button>
                     <button className={classes.likeBtn}>
-                        {event.isArchived ? <FaHeart/> : <LuHeart/>}
+                        {false ? <FaHeart/> : <LuHeart/>}
                     </button>
                 </div>
             </div>

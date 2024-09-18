@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { FaClock, FaHeart, FaLeaf, FaLocationPin } from "react-icons/fa6";
+import { FaClock, FaLeaf, FaLocationPin } from "react-icons/fa6";
 import LikeButton from "./like";
 
 export const dynamic = "force-dynamic";
@@ -27,7 +27,7 @@ export default async function EventPage({
               <p className="font-bold">Уборка</p>
             </div>
           </div>
-          {/* Когда ручки будут готовы, указать тут переменные вместо заглушек */}
+          {/* !!! Когда ручки будут готовы, указать тут переменные вместо заглушек */}
           <LikeButton eventId={params.id} likes={0} isLiked={false} />
         </div>
         <p className="mt-2 text-xl text-neutral-700 md:text-2xl">

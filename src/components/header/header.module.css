@@ -1,0 +1,48 @@
+.wrapper {
+    border-bottom: 1px solid #d0d0d0;
+    @apply
+    w-[100vw]
+    h-[60px]
+    flex
+    justify-center
+    z-50
+    fixed
+    top-0
+
+}
+
+.container {
+    border-bottom: 1px solid #d0d0d0;
+    @apply
+    p-[20px]
+    gap-[10px]
+    max-w-[1100px]
+    w-[100%]
+    bg-white
+    h-[60px]
+    flex
+    items-center
+    justify-between
+}
+
+
+.logo {
+    @apply
+    flex
+    items-center
+    gap-3
+    rounded
+
+}
+
+.link {
+    @apply
+    text-[20px]
+    text-white
+    text-emerald-600
+    font-extrabold
+    hover:opacity-85
+    transition-[.2s]
+
+
+}

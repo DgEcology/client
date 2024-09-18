@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { FaClock, FaHeart, FaLeaf, FaLocationPin } from "react-icons/fa6";
 
 export const dynamic = "force-dynamic";
@@ -8,6 +9,8 @@ export default async function EventPage({
 }: {
   params: { id: string };
 }) {
+  // Заменить все здесь и делать запрос к API
+
   return (
     <main className="mx-auto flex min-h-screen w-[100%] max-w-[900px] flex-col gap-2 p-4">
       <img
@@ -57,13 +60,11 @@ export default async function EventPage({
           <p>Москва, ул. Пушкина, д. 8</p>
         </div>
         <div className="flex gap-2">
-          <FaLeaf/>
+          <FaLeaf />
           <p>Экоцентр: Москва, ул. Пушкина, д. 8</p>
         </div>
       </div>
-      <div className="flex h-14 w-full rounded-lg bg-emerald-400 text-xl font-semibold text-neutral-50">
-        <p className="m-auto">Учавствовать</p>
-      </div>
+      <Button className="w-full">Участвовать</Button>
     </main>
   );
 }

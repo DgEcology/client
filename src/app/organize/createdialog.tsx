@@ -39,17 +39,18 @@ interface DialogWindowProps {
 }
 
 export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
-	// Здесь храниться дата проведения события. 
-	// Ее нужно использовать когда отправляется запрос на создание события.
+  // Здесь храниться дата проведения события.
+  // Ее нужно использовать когда отправляется запрос на создание события.
   const [date, setDate] = useState<DateRange | undefined>({
     from: new Date(2024, 7, 20),
     to: addDays(new Date(2024, 7, 20), 20),
   });
+  const [file, setFile] = useState<File | undefined>();
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-		// TODO: Create event
+    // TODO: Create event
   }
 
   return (
@@ -83,6 +84,24 @@ export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
                 type="text"
                 name="location"
               />
+            </div>
+            <div className="flex flex-col gap-1">
+              <p className="text-xl font-bold">Баннер события</p>
+              <div className="flex flex-row gap-2 w-full">
+                <Input
+                  type="file"
+                  className="cursor-pointer"
+                  placeholder="Выберите изображение"
+                  accept="images/*"
+                  onChange={(e) => setFile(e.target.files?.[0])}
+                />
+                <Button
+                  variant="destructive"
+                  onClick={() => setFile(undefined)}
+                >
+                  Удалить
+                </Button>
+              </div>
             </div>
             <div className="flex flex-col gap-1">
               <p className="text-xl font-bold">Время проведения</p>
@@ -135,7 +154,7 @@ export function DatePicker({ date, setDate }: DatePickerProps) {
         <Calendar
           mode="range"
           defaultMonth={date?.from}
-					locale={ru}
+          locale={ru}
           selected={date}
           onSelect={setDate}
           numberOfMonths={2}

@@ -8,6 +8,7 @@ enum EventStatus {
   Started = "Идет",
   Finished = "Завершено",
   Upcoming = "Запланировано",
+  PendingVerification = "Ожидает проверки",
 }
 
 interface EventEntity {
@@ -45,7 +46,7 @@ export function Event({ event }: EventProps) {
         className="h-64 rounded-t-lg object-cover md:h-full md:w-64 md:rounded-l-lg"
       />
       <div className="flex w-full flex-col justify-between p-4">
-        <div className="space-between flex w-full flex-row">
+        <div className="space-between flex w-full flex-row items-center">
           <div className="flex w-full flex-col">
             <p className="text-2xl font-bold">{event.name}</p>
             <p className="text-lg font-semibold text-emerald-500">
@@ -53,7 +54,8 @@ export function Event({ event }: EventProps) {
             </p>
           </div>
           <div className="flex flex-row gap-2">
-            <Stats />
+            {event.status !== EventStatus.PendingVerification && <Stats />}
+            
             {event.status === EventStatus.Started && <QrCode data="" />}
           </div>
         </div>

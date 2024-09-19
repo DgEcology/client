@@ -73,7 +73,7 @@ const Page = () => {
         datasets: [
             {
                 data: [0.3142, 0.4383, 1.5234, 1.1070, 2.4658, 1.9178],
-                label: 'тест',
+                label: 'мероприятия',
                 type: 'line',
                 pointBackgroundColor: 'rgb(5 150 105)',
                 pointBorderColor: 'rgb(5 150 105)',
@@ -93,7 +93,7 @@ const Page = () => {
             },
             title: {
                 display: true,
-                text: 'тест',
+                text: 'Количество мероприятий по экологии по годам (тыс)',
             },
         },
     }

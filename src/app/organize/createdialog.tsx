@@ -23,6 +23,7 @@ import { FormEvent, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { FaCalendar } from "react-icons/fa6";
 import { TimePicker } from "@/components/ui/time-picker";
+import Image from "next/image"
 
 export default function CreateDialog() {
   const [open, setOpen] = useState(false);

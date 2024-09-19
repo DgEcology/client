@@ -1,60 +1,56 @@
 import IEvent from "@/types/event.interface"
 
 class EventService {
-    async getAll(): Promise<IEvent[]> {
-        return [
-            {
-                id: 1,
-                title: 'Mongolia Forest',
-                description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-                image: 'https://i.pinimg.com/originals/29/4b/d6/294bd607a153b613491e71187d5d2604.jpg',
-                geolocation: 'Moscow',
-                startTime: '01.09.2024',
-                endTime: '02.09.2024',
-                publishTime: 'string',
-                isArchived: false,
-                secretKey: 'string',
-            },
-            {
-                id: 1,
-                title: 'Mongolia Forest',
-                description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-                image: 'https://i.pinimg.com/originals/29/4b/d6/294bd607a153b613491e71187d5d2604.jpg',
-                geolocation: 'Moscow',
-                startTime: '01.09.2024',
-                endTime: '02.09.2024',
-                publishTime: 'string',
-                isArchived: true,
-                secretKey: 'string',
-            },
-            {
-                id: 1,
-                title: 'Mongolia Forest',
-                description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-                image: 'https://i.pinimg.com/originals/29/4b/d6/294bd607a153b613491e71187d5d2604.jpg',
-                geolocation: 'Moscow',
-                startTime: '01.09.2024',
-                endTime: '02.09.2024',
-                publishTime: 'string',
-                isArchived: false,
-                secretKey: 'string',
-            }
-        ]
-    }
 
-    async getOne(): Promise<IEvent> {
-        return {
+    events = [
+        {
             id: 1,
-            title: 'Test 1',
-            description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-            image: 'https://i.pinimg.com/originals/29/4b/d6/294bd607a153b613491e71187d5d2604.jpg',
+            title: 'ЭкоСубботник: Озеленим Москву',
+            description: 'Организация субботников в парках и на набережных города, где участники не только будут собирать мусор, но и высаживать деревья и кустарники. В мероприятии могут участвовать волонтёры всех возрастов, а также компании и учебные заведения.\n' +
+                'Цель: Улучшение экологической ситуации в городе, озеленение и привлечение внимания к проблемам загрязнения городских территорий.\n' +
+                'Дополнительно: В конце мероприятия можно провести мастер-классы по переработке отходов и выставку экологичных продуктов местных производителей.',
+            image: 'https://i.pinimg.com/736x/0d/90/d3/0d90d3c69abd9e5211513fd67e2f5fb6.jpg',
             geolocation: 'Moscow',
-            startTime: 'string',
-            endTime: 'string',
+            startTime: '01.09.2024',
+            endTime: '02.09.2024',
+            publishTime: 'string',
+            isArchived: false,
+            secretKey: 'string',
+        },
+        {
+            id: 2,
+            title: 'Эко-Мода и Устойчивый Бизнес',
+            description: 'Мероприятие, на котором представители малого бизнеса и дизайнеры смогут продемонстрировать свои экологически устойчивые товары и решения: одежду из переработанных материалов, многоразовые аксессуары, биоразлагаемую упаковку. В рамках фестиваля также можно организовать лекции и мастер-классы по созданию экологичной моды и бизнес-подходов.',
+            image: 'https://avatars.mds.yandex.net/i?id=7ff610bf39c08f06132261b4a5b3c320_l-4902992-images-thumbs&n=13',
+            geolocation: 'Moscow',
+            startTime: '01.09.2024',
+            endTime: '02.09.2024',
+            publishTime: 'string',
+            isArchived: true,
+            secretKey: 'string',
+        },
+        {
+            id: 3,
+            title: 'Чистая Москва',
+            description: 'Командная игра-квест, где участники выполняют задания, связанные с защитой окружающей среды: находят и убирают замусоренные локации, сортируют отходы, узнают о видах переработки мусора. Можно включить задания на ориентирование по карте Москвы, чтобы сделать мероприятие более увлекательным.\n' +
+                'Цель: Повышение уровня экологической ответственности среди жителей города, вовлечение молодежи и семей в решение проблем чистоты и благоустройства города.\n' +
+                'Дополнительно: Победители квеста получают эко-призы, например, многоразовые бутылки, сумки или сертификаты на участие в мастер-классах по созданию эко-товаров.',
+            image: 'https://avatars.mds.yandex.net/i?id=7513b605c764c51e93f156523112270a440130a7-5656190-images-thumbs&n=13',
+            geolocation: 'Moscow',
+            startTime: '01.09.2024',
+            endTime: '02.09.2024',
             publishTime: 'string',
             isArchived: false,
             secretKey: 'string',
         }
+    ]
+
+    async getAll(): Promise<IEvent[]> {
+        return this.events
+    }
+
+    async getOne(id: number): Promise<IEvent> {
+        return this.events.filter(event => event.id === id)[0]
     }
 }
 

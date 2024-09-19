@@ -1,8 +1,12 @@
+import React from "react";
+import EventList from "@/components/eventList/eventList";
 
-export default function Home() {
-    return (
-        <div>
-
-        </div>
-    )
-}
+const Page = () => {
+  return (
+    <div>
+      <div style={{ marginTop: "80px" }}></div>
+      <EventList />
+    </div>
+  );
+};
+export default Page;

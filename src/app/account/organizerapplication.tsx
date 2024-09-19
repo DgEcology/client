@@ -42,7 +42,7 @@ export default function OrganizerApplication() {
               <Input placeholder="1234" type="text" name="organization" />
             </div>
             <div className="flex flex-col gap-1">
-              <p className="text-xl font-bold">Номер организации (ОГРН)</p>
+              <p className="text-xl font-bold">Номер организации (ИНН)</p>
               <Input placeholder="1234" type="text" name="serial" />
             </div>
             <div className="flex flex-col gap-1">

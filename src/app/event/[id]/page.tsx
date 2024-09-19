@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { FaClock, FaLeaf, FaLocationPin } from "react-icons/fa6";
 import LikeButton from "./like";
+import YandexMap from "@/components/yandexMap/yandexMap"
 
 export const dynamic = "force-dynamic";
 
@@ -11,6 +12,8 @@ export default async function EventPage({
   params: { id: string };
 }) {
   // Заменить все здесь и делать запрос к API
+
+
 
   return (
     <main className="mx-auto flex min-h-screen w-[100%] max-w-[900px] flex-col gap-2 p-4">
@@ -63,6 +66,8 @@ export default async function EventPage({
           <p>Экоцентр: Москва, ул. Пушкина, д. 8</p>
         </div>
       </div>
+        <YandexMap />
+
       <Button className="w-full">Участвовать</Button>
     </main>
   );

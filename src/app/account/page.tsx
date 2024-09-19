@@ -13,7 +13,7 @@ export default async function Account() {
 
   return (
     <main className="z-10 box-border flex">
-      <div className="max-w-[900px] w-full p-4 mt-[80px] mx-auto">
+      <div className="max-w-[900px] w-full p-4 mx-auto">
         <OrganizerForm />
         <EditForm />
       </div>

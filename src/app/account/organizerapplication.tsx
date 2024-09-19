@@ -12,15 +12,32 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
 import { FormEvent, useState } from "react";
 
 export default function OrganizerApplication() {
   const [open, setOpen] = useState(false);
+  const { toast } = useToast();
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    // TODO: Create application on website
+    const formData = new FormData(event.currentTarget);
+
+    if (!formData.get("organization") || !formData.get("serial")) {
+      toast({
+        title: "Ошибка подачи заявки",
+        description: "Пожалуйста, заполните все поля.",
+      });
+      return;
+    }
+
+    setOpen(false);
+
+    toast({
+      title: "Заявка подана",
+      description: "Ваша заявка была успешно подана. Ожидайте ответа на почте.",
+    });
   }
 
   return (

@@ -1,1 +1,1 @@
-export const host = "https://eco.kostyazero.com"
+export const host = "https://eco.kostyazero.com";

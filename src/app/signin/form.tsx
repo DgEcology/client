@@ -3,8 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { host } from "@/lib/host";
-import axios from "axios";
+import { auth } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 
@@ -23,25 +22,17 @@ export default function LoginForm() {
       return;
     }
 
-    try {
-      const response = axios.post(
-        `${host}/api/login`,
-        {
-          email: formData.get("login"),
-          password: formData.get("password"),
-        },
-        { withCredentials: true }
-      );
-      console.log(response);
-      if ((await response).status === 200) {
-        navigate.push("/");
-      }
-    } catch (error) {
+    const response = await auth(
+      formData.get("login") as string,
+      formData.get("password") as string
+    );
+    if (response) {
+      navigate.push("/");
+    } else {
       toast({
         title: "Ошибка входа",
         description: "Неправильная почта или пароль.",
       });
-      console.error(error);
     }
   }
 
@@ -50,7 +41,7 @@ export default function LoginForm() {
       <Input
         className="w-full my-1"
         placeholder="Почта"
-        type="email"
+        type="text"
         name="login"
       />
       <Input

@@ -27,7 +27,6 @@ import {
   Command,
   CommandEmpty,
   CommandGroup,
-  CommandInput,
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
@@ -92,8 +91,10 @@ export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
       endTime?.getSeconds() || 0
     );
 
-    // Check if all fields are filled and not empty. If not, return an error.
-    if (!startTimestamp || !endTimestamp) {
+    const formData = new FormData(event.currentTarget);
+
+    // Check if all fields in form are filled and not empty. If not, return an error.
+    if (!formData.get("name") || !formData.get("description")) {
       toast({
         title: "Ошибка создания события",
         description: "Пожалуйста, заполните все поля.",
@@ -101,15 +102,45 @@ export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
       return;
     }
 
-    if (!file) {
+    if (!startTimestamp || !endTimestamp) {
       toast({
         title: "Ошибка создания события",
-        description: "Пожалуйста, добавьте изображение.",
+        description: "Пожалуйста, выберите дату проведения события.",
       });
       return;
     }
-  }
 
+    if (startTimestamp > endTimestamp) {
+      toast({
+        title: "Ошибка создания события",
+        description: "Начало события не может быть позже его окончания.",
+      });
+      return;
+    }
+
+    if (!startTime || !endTime) {
+      toast({
+        title: "Ошибка создания события",
+        description: "Пожалуйста, выберите время проведения события.",
+      });
+      return; 
+    }
+
+    if (!file) {
+      toast({
+        title: "Ошибка создания события",
+        description: "Пожалуйста, прикрепите изображение события.",
+      });
+      return;
+    } 
+
+    onOpenChange(false);
+    toast({
+      title: "Событие создано",
+      description: "Событие успешно создано.",
+    });
+  }
+  
   return (
     <form onSubmit={onSubmit}>
       <Dialog open={open} onOpenChange={onOpenChange}>

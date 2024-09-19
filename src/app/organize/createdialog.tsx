@@ -17,6 +17,22 @@ import { FaArrowRight } from "react-icons/fa6";
 import { TimePicker } from "@/components/ui/time-picker";
 import { DatePicker } from "@/components/datepicker";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Check, ChevronsUpDown } from "lucide-react";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { cn } from "@/lib/utils";
+import { ITag } from "@/types/event.interface";
 
 export default function CreateDialog() {
   const [open, setOpen] = useState(false);
@@ -44,6 +60,20 @@ export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
   const [startTime, setStartTime] = useState<Date | undefined>();
   const [endTime, setEndTime] = useState<Date | undefined>();
   const [file, setFile] = useState<File | null>(null);
+  const [value, setValue] = useState("");
+
+  const [openList, setOpenList] = useState(false);
+
+  const tags: Array<ITag> = [
+    {
+      name: "Уборка",
+      id: 0,
+    },
+    {
+      name: "Вынос мусора",
+      id: 1,
+    },
+  ];
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -78,7 +108,6 @@ export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
       });
       return;
     }
-
   }
 
   return (
@@ -106,6 +135,55 @@ export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
               />
             </div>
             <div className="flex flex-col gap-1">
+              <p className="text-xl font-bold">Тип события</p>
+              <Popover open={openList} onOpenChange={setOpenList}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={open}
+                    className="w-[200px] justify-between"
+                  >
+                    {value
+                      ? tags.find((tag) => tag.id.toString() === value)?.name
+                      : "Выберите событие"}
+                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[200px] p-0">
+                  <Command>
+                    <CommandList>
+                      <CommandEmpty>Не найдено</CommandEmpty>
+                      <CommandGroup>
+                        {tags.map((tag) => (
+                          <CommandItem
+                            key={tag.id}
+                            value={tag.id.toString()}
+                            onSelect={(currentValue) => {
+                              setValue(
+                                currentValue === value ? "" : currentValue
+                              );
+                              setOpenList(false);
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                value === tag.id.toString()
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                            {tag.name}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+            </div>
+            <div className="flex flex-col gap-1">
               <p className="text-xl font-bold">Место проведения</p>
               <Input
                 placeholder="Улица, район, дом"
@@ -123,10 +201,7 @@ export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
                   accept="images/*"
                   onChange={(e) => setFile(e.target.files?.[0]!)}
                 />
-                <Button
-                  variant="destructive"
-                  onClick={() => setFile(null)}
-                >
+                <Button variant="destructive" onClick={() => setFile(null)}>
                   Удалить
                 </Button>
               </div>

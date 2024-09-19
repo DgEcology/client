@@ -7,7 +7,7 @@ export default async function SignIn() {
       <div className="m-auto w-[380px] flex flex-col items-center">
         <p className="text-2xl font-semibold">Войдите в свой аккаунт</p>
         <LoginForm />
-        <Link href={"/signin"} className="cursor-pointer">создать аккаунт</Link>
+        <Link href={"/signup"} className="cursor-pointer">Создать аккаунт</Link>
       </div>
     </main>
   );

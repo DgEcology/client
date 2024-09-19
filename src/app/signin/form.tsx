@@ -15,8 +15,6 @@ export default function LoginForm() {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-
-    // Check if all fields are filled and not empty. If not, return an error.
     if (!formData.get("login") || !formData.get("password")) {
       toast({
         title: "Ошибка входа",
@@ -27,9 +25,9 @@ export default function LoginForm() {
 
     try {
       const response = axios.post(
-        `${host}/login`,
+        `${host}/api/login`,
         {
-          login: formData.get("login"),
+          email: formData.get("login"),
           password: formData.get("password"),
         },
         { withCredentials: true }

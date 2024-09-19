@@ -61,7 +61,7 @@ export default function RegisterForm() {
 
     try {
       const response = axios.post(
-        `${host}/signup`,
+        `${host}/api/signup`,
         {
           userName: formData.get("name"),
           email: formData.get("email"),

@@ -32,8 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased w-full`}
       >
         <Header />
-        <div style={{ marginTop: "80px" }}></div>
-
+        <div style={{ marginTop: "40px" }}></div>
         {children}
         <Toaster />
       </body>

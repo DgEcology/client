@@ -1,8 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { ru } from "date-fns/locale";
 import {
   Dialog,
   DialogContent,
@@ -12,18 +10,29 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { addDays } from "date-fns";
+import { FormEvent, useState } from "react";
+import { DateRange } from "react-day-picker";
+import { FaArrowRight } from "react-icons/fa6";
+import { TimePicker } from "@/components/ui/time-picker";
+import { DatePicker } from "@/components/datepicker";
+import { useToast } from "@/hooks/use-toast";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Check, ChevronsUpDown } from "lucide-react";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 import { cn } from "@/lib/utils";
-import { addDays, format } from "date-fns";
-import { FormEvent, useState } from "react";
-import { DateRange } from "react-day-picker";
-import { FaCalendar } from "react-icons/fa6";
-import { TimePicker } from "@/components/ui/time-picker";
-import Image from "next/image"
+import { ITag } from "@/types/event.interface";
 
 export default function CreateDialog() {
   const [open, setOpen] = useState(false);
@@ -47,9 +56,24 @@ export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
     from: new Date(2024, 7, 20),
     to: addDays(new Date(2024, 7, 20), 20),
   });
+  const { toast } = useToast();
   const [startTime, setStartTime] = useState<Date | undefined>();
   const [endTime, setEndTime] = useState<Date | undefined>();
-  const [file, setFile] = useState<File | undefined>();
+  const [file, setFile] = useState<File | null>(null);
+  const [value, setValue] = useState("");
+
+  const [openList, setOpenList] = useState(false);
+
+  const tags: Array<ITag> = [
+    {
+      name: "Уборка",
+      id: 0,
+    },
+    {
+      name: "Вынос мусора",
+      id: 1,
+    },
+  ];
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -68,7 +92,22 @@ export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
       endTime?.getSeconds() || 0
     );
 
-    // TODO: Create event
+    // Check if all fields are filled and not empty. If not, return an error.
+    if (!startTimestamp || !endTimestamp) {
+      toast({
+        title: "Ошибка создания события",
+        description: "Пожалуйста, заполните все поля.",
+      });
+      return;
+    }
+
+    if (!file) {
+      toast({
+        title: "Ошибка создания события",
+        description: "Пожалуйста, добавьте изображение.",
+      });
+      return;
+    }
   }
 
   return (
@@ -96,6 +135,55 @@ export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
               />
             </div>
             <div className="flex flex-col gap-1">
+              <p className="text-xl font-bold">Тип события</p>
+              <Popover open={openList} onOpenChange={setOpenList}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={open}
+                    className="w-[200px] justify-between"
+                  >
+                    {value
+                      ? tags.find((tag) => tag.id.toString() === value)?.name
+                      : "Выберите событие"}
+                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[200px] p-0">
+                  <Command>
+                    <CommandList>
+                      <CommandEmpty>Не найдено</CommandEmpty>
+                      <CommandGroup>
+                        {tags.map((tag) => (
+                          <CommandItem
+                            key={tag.id}
+                            value={tag.id.toString()}
+                            onSelect={(currentValue) => {
+                              setValue(
+                                currentValue === value ? "" : currentValue
+                              );
+                              setOpenList(false);
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                value === tag.id.toString()
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                            {tag.name}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+            </div>
+            <div className="flex flex-col gap-1">
               <p className="text-xl font-bold">Место проведения</p>
               <Input
                 placeholder="Улица, район, дом"
@@ -111,12 +199,9 @@ export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
                   className="cursor-pointer"
                   placeholder="Выберите изображение"
                   accept="images/*"
-                  onChange={(e) => setFile(e.target.files?.[0])}
+                  onChange={(e) => setFile(e.target.files?.[0]!)}
                 />
-                <Button
-                  variant="destructive"
-                  onClick={() => setFile(undefined)}
-                >
+                <Button variant="destructive" onClick={() => setFile(null)}>
                   Удалить
                 </Button>
               </div>
@@ -127,9 +212,9 @@ export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
             </div>
             <div className="flex flex-col gap-1">
               <p className="text-xl font-bold">Время проведения (от/до)</p>
-              <div className="flex flex-row gap-2">
+              <div className="flex flex-row gap-2 items-center">
                 <TimePicker date={startTime} setDate={setStartTime} />
-                <p>{"->"}</p>
+                <FaArrowRight />
                 <TimePicker date={endTime} setDate={setEndTime} />
               </div>
             </div>
@@ -142,50 +227,5 @@ export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
         </DialogContent>
       </Dialog>
     </form>
-  );
-}
-
-interface DatePickerProps {
-  date: DateRange | undefined;
-  setDate: (date: DateRange | undefined) => void;
-}
-
-export function DatePicker({ date, setDate }: DatePickerProps) {
-  return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant={"outline"}
-          className={cn(
-            "w-[280px] justify-start text-left font-normal",
-            !date && "text-muted-foreground"
-          )}
-        >
-          <FaCalendar className="mr-2 h-4 w-4" />
-          {date?.from ? (
-            date.to ? (
-              <>
-                {format(date.from, "LLL dd, y", { locale: ru })} -{" "}
-                {format(date.to, "LLL dd, y", { locale: ru })}
-              </>
-            ) : (
-              format(date.from, "LLL dd, y", { locale: ru })
-            )
-          ) : (
-            <span>Выберите время</span>
-          )}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
-        <Calendar
-          mode="range"
-          defaultMonth={date?.from}
-          locale={ru}
-          selected={date}
-          onSelect={setDate}
-          numberOfMonths={2}
-        />
-      </PopoverContent>
-    </Popover>
   );
 }

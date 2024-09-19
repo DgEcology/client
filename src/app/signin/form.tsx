@@ -3,16 +3,18 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { host } from "@/lib/host";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 
 export default function LoginForm() {
   const { toast } = useToast();
+  const navigate = useRouter();
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-
-    // Check if all fields are filled and not empty. If not, return an error.
     if (!formData.get("login") || !formData.get("password")) {
       toast({
         title: "Ошибка входа",
@@ -21,7 +23,26 @@ export default function LoginForm() {
       return;
     }
 
-    // TODO: Authentication.
+    try {
+      const response = axios.post(
+        `${host}/api/login`,
+        {
+          email: formData.get("login"),
+          password: formData.get("password"),
+        },
+        { withCredentials: true }
+      );
+      console.log(response);
+      if ((await response).status === 200) {
+        navigate.push("/");
+      }
+    } catch (error) {
+      toast({
+        title: "Ошибка входа",
+        description: "Неправильная почта или пароль.",
+      });
+      console.error(error);
+    }
   }
 
   return (

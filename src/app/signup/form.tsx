@@ -5,8 +5,6 @@ import { Input } from "@/components/ui/input";
 import { FormEvent } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
-import axios from "axios";
-import { host } from "@/lib/host";
 import {
   Popover,
   PopoverContent,
@@ -59,32 +57,13 @@ export default function RegisterForm() {
       return;
     }
 
-    try {
-      const response = axios.post(
-        `${host}/signup`,
-        {
-          userName: formData.get("name"),
-          email: formData.get("email"),
-          password: formData.get("password"),
-          repeatPassword: formData.get("repeatpassword"),
-          about: formData.get("aboutme"),
-          phoneNumber: formData.get("phone"),
-          age: age,
-        }
-      );
-      console.log(response);
-      if ((await response).status === 201) {
-        toast({
-          title: "Регистрация прошла успешно",
-          description: "Теперь вы можете войти на сайт.",
-        })
-      } else {}
-    } catch (error) {
-      toast({
+    localStorage.setItem("email", formData.get("email") as string);
+    localStorage.setItem("password", formData.get("password") as string);
 
-      })
-      console.error(error);
-    }
+    toast({
+      title: "Регистрация прошла успешно",
+      description: "Спасибо за регистрацию!",
+    })
   }
 
   return (

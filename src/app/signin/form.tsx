@@ -22,17 +22,25 @@ export default function LoginForm() {
       return;
     }
 
-    const response = await auth(
-      formData.get("login") as string,
-      formData.get("password") as string
-    );
-    if (response) {
-      navigate.push("/");
-    } else {
-      toast({
-        title: "Ошибка входа",
-        description: "Неправильная почта или пароль.",
-      });
+    // Check if email and password fields are in localStorage.
+    // If not, return an error.
+
+    if (
+      localStorage.getItem("email") === formData.get("login") &&
+      localStorage.getItem("password") === formData.get("password")
+    ) {
+      const response = await auth(
+        formData.get("login") as string,
+        formData.get("password") as string
+      );
+      if (response) {
+        navigate.push("/");
+      } else {
+        toast({
+          title: "Ошибка входа",
+          description: "Неправильная почта или пароль.",
+        });
+      }
     }
   }
 

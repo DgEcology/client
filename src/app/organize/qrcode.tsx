@@ -31,7 +31,7 @@ export default function QrCode({ data }: QrCodeProps) {
           </DialogDescription>
         </DialogHeader>
         <div className="flex w-full h-full">
-          <img className="w-64 h-64" src={data} alt="QR Code" />
+          <img className="w-64 h-64 mx-auto" src={data} alt="QR Code" />
         </div>
         <DialogFooter>
           <DialogClose asChild>

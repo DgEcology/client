@@ -9,7 +9,7 @@ const EventList = async () => {
         <div className={classes.container}>
             {
                 events.map(e => (
-                    <EventCard event={e} />
+                    <EventCard event={e} key={e.id} />
                 ))
             }
         </div>

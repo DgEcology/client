@@ -25,7 +25,17 @@ ChartJS.register(
 )
 
 const Page = () => {
-
+    const [width, setWidth] = useState(0)
+    useEffect(() => {
+        setWidth(window.innerWidth < 350 ?
+            350 :
+            (window.innerWidth <= 768 ?
+                    window.innerWidth - 20 :
+                    (window.innerWidth <= 1080 ?
+                        750 :
+                        900)
+            ))
+    })
     // @ts-ignore
     const data1: ChartData<'line'> = {
         labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
@@ -91,25 +101,11 @@ const Page = () => {
     return (
         <div>
             <div style={{
-                width: window.innerWidth < 350 ?
-                    350 :
-                    (window.innerWidth <= 768 ?
-                            window.innerWidth - 20 :
-                            (window.innerWidth <= 1080 ?
-                                750 :
-                                900)
-                    ) + 'px', margin: '50px auto'}}>
+                width: width + 'px', margin: '50px auto'}}>
                 <Line data={data1} options={options1}/>
             </div>
             <div style={{
-                width: window.innerWidth < 350 ?
-                    350 :
-                    (window.innerWidth <= 768 ?
-                            window.innerWidth - 20 :
-                            (window.innerWidth <= 1080 ?
-                                750 :
-                                900)
-                    ) + 'px', margin: '50px auto'}}>
+                width: width + 'px', margin: '50px auto'}}>
                 <Line data={data2} options={options2}/>
             </div>
         </div>

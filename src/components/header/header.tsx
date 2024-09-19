@@ -7,7 +7,7 @@ const Header = () => {
         <div className={classes.wrapper}>
             <nav className={classes.container}>
 
-                <Link className={classes.logo} href={'/main'}>
+                <Link className={classes.logo} href={'/'}>
                     <FaClover
                         color={'rgb(5 150 105)'}
                         size={30}
@@ -18,7 +18,7 @@ const Header = () => {
                 <Link href={'/stats'} className={classes.link}>
                     Статистика
                 </Link>
-                <Link href={'/account'} className={classes.link}>
+                <Link href={'/'} className={classes.link}>
                     Аккаунт
                 </Link>
 

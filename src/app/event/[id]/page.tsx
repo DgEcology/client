@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { cookies } from "next/headers";
 import { FaClock, FaLeaf, FaLocationPin } from "react-icons/fa6";
-import LikeButton from "./like";
 
 export const dynamic = "force-dynamic";
 
@@ -10,9 +10,10 @@ export default async function EventPage({
 }: {
   params: { id: string };
 }) {
-  // Заменить все здесь и делать запрос к API
+  const cookieStore = cookies();
+  const isRegistered = cookieStore.has("SESSION");
 
-  const isRegistered = false;
+
 
   return (
     <main className="mx-auto flex min-h-screen w-[100%] max-w-[900px] flex-col gap-2 p-4">
@@ -24,13 +25,11 @@ export default async function EventPage({
       <div className="">
         <div className="flex flex-row items-center justify-between">
           <div className="flex items-center gap-3">
-            <p className="text-2xl font-bold md:text-4xl">Уборка полей</p>
+            <p className="text-2xl font-bold md:text-4xl">{}</p>
             <div className="text-md my-auto rounded-lg bg-emerald-500 px-2 py-1 text-neutral-50">
               <p className="font-bold">Уборка</p>
             </div>
           </div>
-          {/* !!! Когда ручки будут готовы, указать тут переменные вместо заглушек */}
-          <LikeButton eventId={params.id} likes={0} isLiked={false} />
         </div>
         <p className="mt-2 text-lg text-neutral-700 md:text-xl">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

@@ -3,10 +3,14 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { host } from "@/lib/host";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 
 export default function LoginForm() {
   const { toast } = useToast();
+  const navigate = useRouter();
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -21,7 +25,26 @@ export default function LoginForm() {
       return;
     }
 
-    // TODO: Authentication.
+    try {
+      const response = axios.post(
+        `${host}/login`,
+        {
+          login: formData.get("login"),
+          password: formData.get("password"),
+        },
+        { withCredentials: true }
+      );
+      console.log(response);
+      if ((await response).status === 200) {
+        navigate.push("/");
+      }
+    } catch (error) {
+      toast({
+        title: "Ошибка входа",
+        description: "Неправильная почта или пароль.",
+      });
+      console.error(error);
+    }
   }
 
   return (

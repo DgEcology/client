@@ -18,6 +18,7 @@ const EventCard = ({event}: { event: IEvent }) => {
                     src={event.image}
                     alt={'Изображение события'}
                     layout={'fill'}
+                    loading={'lazy'}
                     objectFit={'cover'}
                 />
             </div>

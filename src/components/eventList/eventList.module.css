@@ -1,7 +1,6 @@
 .container {
-    @apply
-    flex
+  @apply flex
     flex-col
     items-center
-    justify-center
+    justify-center;
 }

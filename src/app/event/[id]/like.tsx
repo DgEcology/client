@@ -21,11 +21,11 @@ export default function LikeButton({ eventId, likes, isLiked }: LikeProps) {
   }
 
   return (
-    <div className="flex items-center gap-2 text-2xl md:text-4xl">
+    <div className="flex items-center gap-2 text-2xl md:text-3xl">
       {liked ? (
-        <FaHeart className="h-8 w-8 md:h-10 md:w-10" />
+        <FaHeart className="h-6 w-6 md:h-8 md:w-8" />
       ) : (
-        <FaRegHeart className="h-8 w-8 md:h-10 md:w-10" />
+        <FaRegHeart className="h-6 w-6 md:h-8 md:w-8" />
       )}
       <p>{likesCount}</p>
     </div>

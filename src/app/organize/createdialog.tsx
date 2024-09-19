@@ -22,12 +22,13 @@ import { addDays, format } from "date-fns";
 import { FormEvent, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { FaCalendar } from "react-icons/fa6";
+import { TimePicker } from "@/components/ui/time-picker";
 
 export default function CreateDialog() {
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <Button>Создать событие</Button>
+      <Button onClick={() => setOpen(true)}>Создать событие</Button>
       <DialogWindow open={open} onOpenChange={setOpen} />
     </div>
   );
@@ -45,10 +46,26 @@ export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
     from: new Date(2024, 7, 20),
     to: addDays(new Date(2024, 7, 20), 20),
   });
+  const [startTime, setStartTime] = useState<Date | undefined>();
+  const [endTime, setEndTime] = useState<Date | undefined>();
   const [file, setFile] = useState<File | undefined>();
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    let startTimestamp = date?.from;
+    startTimestamp?.setHours(
+      startTime?.getHours() || 0,
+      startTime?.getMinutes() || 0,
+      startTime?.getSeconds() || 0
+    );
+
+    let endTimestamp = date?.to;
+    endTimestamp?.setHours(
+      endTime?.getHours() || 0,
+      endTime?.getMinutes() || 0,
+      endTime?.getSeconds() || 0
+    );
 
     // TODO: Create event
   }
@@ -104,8 +121,16 @@ export function DialogWindow({ open, onOpenChange }: DialogWindowProps) {
               </div>
             </div>
             <div className="flex flex-col gap-1">
-              <p className="text-xl font-bold">Время проведения</p>
+              <p className="text-xl font-bold">Дата проведения</p>
               <DatePicker date={date} setDate={setDate} />
+            </div>
+            <div className="flex flex-col gap-1">
+              <p className="text-xl font-bold">Время проведения (от/до)</p>
+              <div className="flex flex-row gap-2">
+                <TimePicker date={startTime} setDate={setStartTime} />
+                <p>{"->"}</p>
+                <TimePicker date={endTime} setDate={setEndTime} />
+              </div>
             </div>
           </div>
 

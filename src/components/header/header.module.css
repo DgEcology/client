@@ -1,60 +1,47 @@
 .wrapper {
-    border-bottom: 1px solid #d0d0d0;
-    @apply
-    w-[100vw]
-    h-[60px]
+  border-bottom: 1px solid #d0d0d0;
+  @apply h-[60px]
+  w-full
     flex
     justify-center
     z-50
     fixed
-    top-0
-    left-[-50%]
-    translate-x-[50%]
-
+    top-0;
 }
 
 .container {
-    border-bottom: 1px solid #d0d0d0;
-    @apply
-    p-[20px]
+  border-bottom: 1px solid #d0d0d0;
+  @apply p-[20px]
     gap-[10px]
-    max-w-[1100px]
+    max-w-[900px]
     w-[100%]
     bg-white
     h-[60px]
     flex
     items-center
-    justify-between
+    justify-between;
 }
 
-
 .logo {
-    @apply
-    flex
+  @apply flex
     items-center
     gap-3
-    rounded
-    w-[150px]
-    justify-center
-
+    rounded;
 }
 
 .logo span {
-    @apply
-    text-[20px]
-text-emerald-600
-font-extrabold
-    hover:opacity-85
-    transition-[.2s]
-}
-
-.link {
-    @apply
-    text-[20px]
+  @apply text-[20px]
     text-emerald-600
     font-extrabold
     hover:opacity-85
-    transition-[.2s]
-    w-[150px]
-    flex justify-center
+    transition-[.2s];
+}
+
+.link {
+  @apply text-[20px]
+    text-white
+    text-emerald-600
+    font-extrabold
+    hover:opacity-85
+    transition-[.2s];
 }
